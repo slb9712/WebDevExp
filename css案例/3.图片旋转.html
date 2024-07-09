@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body{
+      /* 设置成黑色背景，使得盒子阴影更亮 */
+      /* background: #000; */
+      width: 100vw;
+      height: 100vh;
+      /* 防止抖动 */
+      overflow: hidden;
+    }
+    .contain {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      margin-top: -100px;
+      margin-left: -100px;
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      animation:  turn 10s linear infinite;
+      background-color: pink;
+      /* clip-path: circle(50% at 50% 50%) */
+    }
+    .contain:hover{
+      animation-play-state:paused;
+    }
+    .contain div{
+      /* 把每个面设置成相对定位，方便后面拼接 */
+      position: absolute;
+      top: 0;
+      left: 0;
+      
+      
+    }
+    .pic_front {
+      height: 200px;
+      width: 200px;
+      /* background-color: pink; */
+      background-image: url('./coin.jpg');
+      background-size: cover;
+      transform: translateZ(10px) ;
+    }
+    .pic_back {
+      height: 200px;
+      width: 200px;
+      background-image: url('./coin.jpg');
+      background-size: cover;
+      transform: translateZ(-10px);
+    }
+    /* 左边 需要先让他沿Y轴转90度 ，然后再沿z轴往后走150px */
+    /* .left{
+      width: 20px;
+      height: 300px;
+      transform:rotateY(90deg) translateZ(0px);
+      background-color: #cfa;
+    } */
+    /* 右边  需要先让他沿Y轴转90度 ，然后再沿z轴往前走150px */
+    /* .right{
+      width: 20px;
+      height: 300px;
+      transform:rotateY(90deg) translateZ(190px);
+      background-color: #caf;
+    } */
+    /* 上面 需要想让他沿X轴旋转90度，然后再沿Z轴往后走150px */
+    /* .top{
+      transform:rotateX(90deg) translateZ(-150px);
+      background-color: #afc;
+    } */
+    /* 上面 需要想让他沿X轴旋转90度，然后再沿Z轴往前走150px */
+    /* .bottom{
+      transform:rotateX(90deg) translateZ(150px);
+      background-color: #acf;
+    } */
+    
+    @keyframes turn {
+      from{
+        transform:rotateY(360deg);
+      }
+      to{
+        transform:rotateY(0deg) ;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="contain">
+    <div class="pic_front"></div>
+    <div class="pic_back"></div>
+    <!-- <div class="left"></div>
+    <div class="right"></div> -->
+    <!-- <div class="top"></div>
+    <div class="bottom"></div> -->
+  </div>
+    
+</body>
+</html>

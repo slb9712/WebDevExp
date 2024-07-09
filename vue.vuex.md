@@ -1,0 +1,5 @@
+State。用于存储应用的全局状态，类似于Vue组件中的data选项。12345678
+Getters。类似于计算属性，可以从State派生出新的状态，其返回值会根据依赖的State属性变化而自动更新。1234578
+Mutations。用于修改State中的状态，是唯一更改State的方法，每个Mutation都有一个字符串的事件类型和一个回调函数，用于处理State的变更。
+Actions。用于提交Mutation，类似于mutation，但可以包含异步操作，在Action中可以执行store.commit来提交Mutation。
+Modules。用于将Store分割成模块，每个模块拥有自己的State、Mutation、Action和Getter，使得结构更加清晰和易于管理。

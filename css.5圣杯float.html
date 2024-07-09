@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+    body{
+        width:100vw;
+        height:100vh;
+    }
+    .con{
+        padding:0 100px;
+        background-color: #333;
+    }
+    .con > div{
+        float: left;
+    }
+    .l{
+        position:relative;
+        right:100px;
+        margin-left: -100%;
+        width:100px;
+        height: 50px;
+        background-color: blue;
+    }
+    .c{
+        width:100%;
+        height: 50px;
+        background-color: pink;
+    }
+    .r{
+        margin-right:-100px;
+        width:100px;
+        height: 50px;
+        background-color: lawngreen;
+    }
+    
+</style>
+</head>
+
+<body>
+    <div style="padding:10px;width:200px;background-color:rgb(148, 148, 185);border:1px solid #ddd">盒模型，标准盒模型，padding和border加上宽高，一起决定盒子大小。box-sizing:content-box。怪异盒模型，宽高决定盒子大小，包含border和padding。box-sizing:border-box</div>
+<div class="con">
+    <div class="c">中</div>
+    <div class="l">左</div>
+    <div class="r">右</div>
+</div>
+
+
+</body>
+</html>

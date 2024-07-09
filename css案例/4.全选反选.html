@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <span>全选</span><input type="checkbox" id="cekall">
+    <div id="box">
+      <input type="checkbox">
+      <input type="checkbox">
+      <input type="checkbox">
+    </div>
+    
+  </div>
+</body>
+<script>
+  let checkbox = document.querySelector("#cekall")
+  let son = document.querySelector('#box').querySelectorAll('input')
+  checkbox.addEventListener('click', function() {
+    // console.log(checkbox.checked)
+    // console.log(son)
+    if (this.checked) {
+      for (let i = 0; i < son.length; i++) {
+        if (!son[i].checked) {
+          son[i].checked = true
+        }
+      }
+    } else {
+      for (let i = 0; i < son.length; i++) {
+        if (son[i].checked) {
+          son[i].checked = false
+        }
+      }
+    }
+  })
+  for (let i = 0; i < son.length; i++) {
+    son[i].addEventListener('click', function() {
+      let flag = true
+      for (let j =0; j < son.length; j++) {
+        if (!son[j].checked) {
+          flag = false
+        }
+      }
+      if (!checkbox.checked && flag){
+        checkbox.checked = true
+      } else {
+        checkbox.checked = false
+      }
+      
+    })
+  }
+</script>
+</html>

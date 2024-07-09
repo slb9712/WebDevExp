@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  /* background-color: pink; */
+}
+
+.container {
+  display: flex;
+  width: 90vw;
+}
+
+.panel {
+  /* contain: 缩小图片来适应元素的尺寸（保持像素的长宽比），是图片宽高最长的那个边覆盖元素一边即可 */
+  /* cover: 扩展图片来填满元素（保持像素的长宽比），是图片宽高最短的那个边覆盖元素一边即可 */
+  background-size: cover;
+  /* 设置起始位置 */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  flex: 0.5;
+  margin: 10px;
+  position: relative;
+  transition: all 700ms ease-in; 
+  /* 变化属性|持续时间| 时间函数（ease-in：由慢到快|ease-out：由快到慢|ease-in-out：由慢到快在到慢）*/
+}
+
+.panel h3 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 24px;
+  margin: 0;
+  opacity: 0;
+
+}
+
+.panel.active {
+  flex: 5;
+
+}
+
+.panel.active h3 {
+  opacity: 1;
+  transition: opacity 0.4s ease-in 0.2s;
+}
+
+/* 宽度小于480更改样式 */
+@media (max-width: 480px) { 
+  .container {
+    width: 100vw;
+  }
+  /* 后面两个隐藏掉,变宽一些 nth-of-type同一类型下的子元素*/
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) {
+    display: none;
+  }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+			
+    body{
+      /* 设置成黑色背景，使得盒子阴影更亮 */
+      /* background: #000; */
+      width: 100vw;
+      height: 100vh;
+      /* 防止抖动 */
+      overflow: hidden;
+    }
+  
+    .bigBox{
+      /* 如果想要让其子元素开启3d效果必须添加该属性 表示所有子元素在3D空间中呈现。*/
+      transform-style: preserve-3d;
+      
+         /*让整个魔方居中显示 */
+      position: relative;
+      left: 50%;
+      margin-left: -150px;
+      top: 50%;
+      margin-top: -150px;
+      
+      width: 300px;
+      height: 300px;
+      /* 沿X轴顺指针转动30度 沿Y轴转动30度  为了更方便观察和拼接 */
+      /* transform: rotateX(30deg) rotateY(30deg); */
+      
+      /* 添加动画 */
+      /* 属性 动画名称 动画时长 运动速度 是否重复 */
+      animation:  turn 5s linear infinite;
+    }
+    /* 鼠标悬停动画停止 */
+    .bigBox:hover{
+      animation-play-state:paused;
+    }
+    
+    .bigBox div{
+      /* 把每个面设置成相对定位，方便后面魔方的拼接 */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      
+    }
+    /* 拼装正方形 */
+    /* 前面  让它沿Z轴走150px(也就是向前移动150像素) */
+    .front{
+      transform: translateZ(150px) ;
+      background-color: #fac;
+      /* 添加盒子阴影就会有发光的效果 */
+      /* 参数分别是 阴影水平位置，阴影垂直位置 阴影的模糊距离 阴影的颜色 */
+      box-shadow: 0 0 100px #fac;
+    }
+    /* 后面 让它沿Z轴走-150px(也就是向后走150像素)这样前后两个面之间的距离就正好是一个面的宽 */
+    .back{
+      transform: translateZ(-150px);
+      background-color: #fca;
+      box-shadow: 0 0 100px #fca;
+    }
+    /* 左边 需要先让他沿Y轴转90度 ，然后再沿z轴往后走150px */
+    .left{
+      transform:rotateY(90deg) translateZ(-150px);
+      background-color: #cfa;
+      box-shadow: 0 0 100px #cfa;
+    }
+    /* 右边  需要先让他沿Y轴转90度 ，然后再沿z轴往前走150px */
+    .right{
+      transform:rotateY(90deg) translateZ(150px);
+      background-color: #caf;
+      box-shadow: 0 0 100px #caf;
+    }
+    /* 上面 需要想让他沿X轴旋转90度，然后再沿Z轴往后走150px */
+    .top{
+      transform:rotateX(90deg) translateZ(-150px);
+      background-color: #afc;
+      box-shadow: 0 0 100px #afc;
+    }
+    /* 上面 需要想让他沿X轴旋转90度，然后再沿Z轴往前走150px */
+    .bottom{
+      transform:rotateX(90deg) translateZ(150px);
+      background-color: #acf;
+      box-shadow: 0 0 100px #acf;
+    }
+    
+    
+    /* 动画  沿x轴转动360度 沿y轴旋转360度*/
+    
+    @keyframes turn {
+      from{
+        transform:rotateX(360deg) rotateY(360deg);
+      }
+      to{
+        transform:rotateX(0deg) ;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- bigBox用于让整个魔方居中显示 -->
+  <div class="bigBox">
+    <!-- 这里的div分别是魔方的六个面 -->
+    <div class="front"></div>
+    <div class="back"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="top"></div>
+    <div class="bottom"></div>
+  </div>
+</body>
+</html>

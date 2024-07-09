@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生js模拟双向数据绑定</title>
+</head>
+<body>
+  <input type="text" id="txt" oninput="inputFn()"/>
+  <span>双向绑定框</span>
+</body>
+<script>
+
+
+//  Vue响应式指的是：组件的data发生变化，立刻触发试图的更新 
+// 原理： Vue 采用数据劫持结合发布者-订阅者模式的方式来实现数据的响应式，通过Object.defineProperty来劫持数据的setter，getter，在数据变动时发布消息给订阅者，触发监听回调。
+
+// Object.defineProperty用来定义对象的属性
+// 特点：默认情况下定义的数据的属性不能修改 描述属性和存取属性不能同时使用，使用会报错 响应式原理： 获取属性值会触发get方法 设置属性值会触发set方法，在set前先看有没有被get监听， 在setter方法中调用修改dom的方法
+
+//缺陷：2.缺陷:无法对新添加或删除的属性进行监听、无法监听数组的变化。
+// defineProperty只能监听对象的单个属性，需要递归对所有属性的监听， 一次性递归到底开销很大，如果数据很大，大量的递归导致调用栈溢出 VUE3已经改成proxy
+
+
+
+
+
+  let data = {
+    msg: '初始值'
+  }
+  // 相当vm实例
+  let vm = {}
+  // 变量-》视图
+  // 1、vm实例添加同名的属性
+  Object.defineProperty(vm, 'msg', {
+    set(val) { // 给vm的msg属性赋值就会触发set方法，val就是要赋给vm.msg的值
+      data['msg'] = val
+      // 2、set中影响对应视图
+      document.querySelector('#txt').value = val
+    },
+    get() { // 给vm的msg属性取值
+      return data['msg']
+    }
+  })
+  // 视图-》变量
+  function inputFn(ev) {
+    ev = ev || window.event
+    vm.msg = ev.target.value
+  }
+  vm.msg = data.msg
+
+</script>
+</html>

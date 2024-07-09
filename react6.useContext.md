@@ -1,0 +1,54 @@
+const value = useContext(MyContext);
+
+接收一个 context 对象（React.createContext 的返回值）并返回该 context 的当前值。
+当组件上层最近的 <MyContext.Provider> 更新时，会触发重渲染，并使用最新传递给 MyContext provider的value 值。即使祖先使用React.memo或shouldComponentUpdate，也会在组件本身使用useContext时重新渲染。
+useContext的参数必须是context对象本身：useContext(MyContext)。
+项目中一般应用于各组件模块公用的数据，传入公用数据然后再各组件中使用，如：用户信息、环境配置、abTest数据等。
+```ts 
+import React from 'react';
+
+export const ConfigContext = React.createContext({});
+
+export const ConfigProvider(props) {
+	const { children } = props;
+	const [configData, setConfigData] = useState({});
+	useEffect(() =&gt; {
+		...//获取数据
+		setConfigData(data);
+	}, []);
+	return (
+		&lt;ConfigContext.Provider value={configData}&gt;
+			{children}
+		&lt;/ConfigContext.Provider>
+	);
+}
+
+export const ConfigProviderWrapper = RouterComponent =&gt; () =&gt; (
+  &lt;ConfigProvider&gt;
+    &lt;RouterComponent /&gt;
+  &lt;/ConfigProvider>
+);
+ 
+// route.ts 配置路由组件时，使用ConfigProvider
+import MyComponent from './MyComponent';
+import { ConfigProviderWrapper } from './ConfigProvider';
+
+export function getRoutes() {
+  return {
+    [`path/index`]: {
+     render: ConfigProviderWrapper(MyComponent),
+     title: '',
+    },
+  }
+}
+ 
+import { ConfigContext } from './ConfigProvider';
+
+const abTestConfig = useContext(ConfigContext);
+const [isActivityUser, setIsActivityUser] = useState(true); // abTest判断是否是目标用户
+
+useEffect(() =&gt; {
+    const isUser = checkIfShowPersonalBanner(abTestConfig);
+    setIsActivityUser(isUser);
+}, [abTestConfig]);
+```
