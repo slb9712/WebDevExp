@@ -14,7 +14,7 @@ console.log(b)
 console.log(b())
 
 // 2    1    b not a function 
-// 原因：function 关键字声明的函数会被优先执行
+// 原因：function 关键字声明的函数会被优先执行，var b 知识声明过程提升，只有执行到的时候才会执行赋值过程
 ```
 
 

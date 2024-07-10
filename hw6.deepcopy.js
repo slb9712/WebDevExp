@@ -60,7 +60,35 @@ function deepClone(target) {
       return target;
   }
 }
+ 
 
+const deepClones = (arr) => {
+  if (arr instanceof Object) {
+    let newArr
+    if (Array.isArray(arr)) {
+      newArr = []
+    } else if (arr instanceof Function) {
+      return function() {
+        return arr.call(this, ...arguments)
+      } 
+    } else if (arr instanceof RegExp) {
+      return new RegExp(arr.source, arr.flags)
+      
+    } else if (arr instanceof Date) {
+      return new Date(arr)
+    } else {
+      newArr = {}
+    } 
+    for(let key in arr) {
+      if(Object.hasOwnProperty(key)) {
+        newArr[key] = deepClones(arr[key])
+      }
+    }
+    return newArr
+  } else {
+    return arr
+  }
+}
 
 /**
  * 浅拷贝

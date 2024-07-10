@@ -1,6 +1,26 @@
 ## less和sass区别
-less @ 定义变量， sass用$ ，sass使用{}嵌套
-Sass支持条件语句，可以使用if{}else{},for{}循环等等，而Less不支持
+less @ 定义变量， sass\scss用$ ，sass使用{}嵌套
+Sass支持条件语句，可以使用if{}else{},for{}循环等等，而Less不支持,less可以同步when比较传入的值达到判断和循环的效果
+```less
+// if判断
+.set-width(@value) when (@value > 50px) {
+  width: @value;
+}
+
+.set-width(@value) when not (@value > 50px) {
+  width: 50px;
+}
+
+// for循环
+.loop(@i) when (@i > 0) {
+  .item-@{i} {
+    width: @i * 10px;
+  }
+  .loop(@i - 1);
+}
+
+.loop(5);
+```
 
 Less是基于JavaScript，是在客户端处理的。
 
@@ -26,4 +46,28 @@ module.exports = {
       },
     },
   };
+```
+
+## scss
+```scss
+// @mixin 和 @include 是用于创建和应用样式混合（mixin）的工具
+
+@mixin thumbHover() {
+  transform: scaleY(1.2);
+  width: 24px;
+} // 样式声明的代码块，可以在多个地方重用
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  @include thumbHover();
+} // 在特定选择器中应用已定义的mixin
+
+input[type="number"],
+input[type="text"],
+input[type="password"] {
+  appearance: none;
+  border-radius: 10px;
+  border: var(--border-in-light);
+  max-width: 50%;
+  font-family: inherit;
+}
 ```

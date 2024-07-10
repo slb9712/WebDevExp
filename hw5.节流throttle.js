@@ -3,11 +3,10 @@
  * 高频率触发的事件,在指定的单位时间内，只响应第一次。控制事件发生的频率，如控制为1s发生一次，甚至1分钟发生一次。
  * ------------------------------------
  * 场景
- * 1、鼠标连续不断地触发某事件（如点击），单位时间内只触发一次；
- * 2、计算鼠标移动距离
- * 3、监听scroll滚动事件，比如是否滑到底部自动加载更多
- * 4、浏览器播放事件，每个一秒计算一次进度信息等
- * 快速点击，抢购的时候，
+ * 1、鼠标连续不断地触发某事件（如表单提交，抢购等等），单位时间内只触发一次；
+ * 2、监听scroll滚动、鼠标移动事件，比如是否滑到底部自动加载更多
+ * 3、浏览器播放事件，每个一秒计算一次进度信息等
+ *
  * -----------------------------------------
  * 方式：
  * 1、时间戳
@@ -23,15 +22,13 @@ function throttle(func, wait) {
   }
 }
 
-function throttles(func, wait) {
-  let pre = 0;
-  return function() {
-    let cur = Date.now();
-    let context = this;
-    let args = arguments;
-    if (cur - pre >= wait) {
-      func.apply(context, args);
-      pre = cur;
+function throttle(func, wait) {
+  let pre = Data.now()
+  return function(){
+    let cur = Data.now()
+    if (cur - pre > wait) {
+      func()
+      pre = cur
     }
   }
 }

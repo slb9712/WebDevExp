@@ -1,11 +1,11 @@
 
 /**防抖策略（debounce）是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。
  * 应用场景（懒加载）
- * 1、scroll滚动触发
- * 2、搜索框输入查询
+ * 1、
+ * 2、搜索框输入自动查询
  * 3、文本编辑器实时保存，当无任何更改操作一秒后进行保存
- * 4、登录等按钮提交操作，避免多次请求
- * 5、窗口缩放，resize事件频繁
+ * 4、表单等信息验证，避免多次请验证求
+ * 5、窗口缩放，监听resize事件，避免频繁触发
  */
 
 
@@ -36,6 +36,17 @@ function debounce(func, wait) {
         fn.apply(this, arguments)
         timer = null
     }, delay)
+    }
+  }
+}
+
+function dd (func, wait) {
+  let timer
+  return function() {
+    if (timer) {
+      clearTimeout(timer)
+    } else {
+      timer = setTimeout(() => {func(); timer = null}, wait)
     }
   }
 }
