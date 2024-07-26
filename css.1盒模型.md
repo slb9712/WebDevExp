@@ -1,6 +1,6 @@
 ## 盒模型
 标准盒模型用:box-sizing:content-box; 将采用标准模式的盒子模型标准
-标准盒模型:一个块的总宽度(页面中占的宽度)= content width + margin(左右) + padding(左右) + border(左右)
+标准盒模型:一个块的总宽度(页面中占的宽度)= content width + margin(左右) + padding(左右) + border(左右)。 高度同理
 
 怪异盒模型用:box-sizing:border-box; 将采用怪异模式的盒子模型标准
 怪异盒模型:一个块的总宽度= content width（已经包含了padding和border值） + margin(左右)（IE浏览器）
@@ -16,6 +16,8 @@ box-sizing:inherit 父元素继承box-sizing的属性值
 `element.currentStyle.width`
 4. 获取一个元素的绝对位置。绝对位置是视窗 viewport 左上角的绝对位置。此 api 可以拿到四个属性：left、top、width、height。
 `element.getBoundingClientRect().width`
+
+
 
 ## 边距重叠： 
 两个box如果都设置了边距，那么在垂直方向上，两个box的边距会发生重叠，以绝对值大的那个为最终结果显示在页面上。

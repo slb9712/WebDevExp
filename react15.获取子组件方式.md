@@ -36,7 +36,10 @@ function Child(props, parentRef) {
 let ForwardChild = forwardRef(Child);
 ```
 
-## 上面的方式都会将组件中全部的数据暴露出去,有时候我们想只想暴露出一部分数据
+## 上面的方式都会将input组件中全部的数据暴露出去,有时候我们想只想暴露出一部分数据
+通过useImperativeHandle搭配forwardRef
+通过useImperativeHandle搭配forwardRef是React 中的一个 Hook，它能让你自定义由 ref 暴露出来的句柄。
+forwardRef 允许组件使用 ref 将 DOM 节点暴露给父组件。使用 forwardRef() 让组件接收 ref 并将其传递给子组件。
 ```js
 
 // 父组件

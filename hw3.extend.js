@@ -7,18 +7,26 @@
 function Parent() {}
 function Children() {}
 Children.prototype = new Parent()
-
+Children.prototype.constructor = Children;
 /**构造函数继承
  * 
- * 避免了子类示例共享引用属性的情况
- * 可以在实例化时给Parent构造函数传递参数
- * 
+ * 避免了子类示例共享引用属性的情况,但无法继承父类原型上的方法 
  * 如果Parent中存在一个函数，那么每次实例化Children的时候，都会创建一个同样函数，函数的复用性就难以体现
  */
 
+function Parent() {
+  this.property = 'parent'
+}
+Parent.prototype.say = function () {
+  console.log('say')
+}
+function Child() {
+  Parent.call(this)
+  this.property = 'child'
+}
 
 /***
- * 组合继承：
+ * 组合继承： 原型继承+构造函数继承
  * 调用了父类构造函数组合式继承将原型链和构造函数的技术组合到一起，
  * 结合两者的优点，通过原型链实现对原型属性和方法的继承以及借用构造函数
  * 来实现对实例属性的继承。拥有以下的优点。

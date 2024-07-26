@@ -7,6 +7,9 @@
 缓存使用不当，会有「脏数据」，导致用户数据异常。
 
 
+## 强缓存和协商缓存通常由后端服务器进行配置，通过设置 HTTP 响应头（如 Expires、Cache-Control、Last-Modified、ETag）来实现。
+## 前端也可以通过在请求中添加相应的头（如 Cache-Control、If-Modified-Since）来控制缓存行为
+
  ## 强缓存
 服务器端可以设置。
 
@@ -26,7 +29,6 @@
 Expires和Cache-Control决定了浏览器是否要发送请求到服务器，ETag和Last-Modified决定了服务器是要返回304+空内容还是新的资源文件。
 
 强缓存会有3种命中模式：from memory cache与from disk cache，资源本身的大小(如：1.5k)
-
 
 ## 协商缓存
 协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程

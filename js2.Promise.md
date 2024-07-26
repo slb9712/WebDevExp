@@ -20,7 +20,7 @@ ES6在规范实现基础上额外增加了一些Promise.all和Promise.race之类
 caniuse.com 查看兼容情况
 
 ## Promise 的各种规范
-promiseA+规范
+promiseA+规范:    Promise 只能使用异步调用方式
 promise应该有三种状态
 then
 promise应该提供一个then方法，用来访问最终的结果，无论是value还是reason

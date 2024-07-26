@@ -17,3 +17,55 @@
 5. 行内属性标签，设置display:block后采用float布局，又有横行的margin的情况，IE6间距bug。
 
 在display:block;后面加入display:inline;display:table;
+
+
+## js等兼容可以配置bebel和polyfill
+Babel 本身的插件或专门的代码检查工具可以扫描代码看哪些特性不支持
+@babel/eslint-parser， 安装并设置好 @babel/eslint-parser 后，只需运行 ./node_modules/.bin/eslint yourfile.js，即可对文件进行完整的 ESLint 检查
+
+Babel 主要负责将新的 JavaScript 语法和特性转换为目标环境能够理解的旧语法。例如，将 ES6 的类定义转换为基于 ES5 的构造函数实现。
+polyfill 则用于填补浏览器中缺失的原生 JavaScript 方法和特性，Babel 在转译过程中会识别到这一点，而配置好的 polyfill （如 core-js ）会提供这个方法的实现。
+
+### 常用polyfill库有 core-js、 babel-polyfill       bebel库@babel/core @babel/preset-env
+
+## css兼容
+
+Autoprefixer 的使用步骤
+1. 安装 Autoprefixer 和 PostCSS
+首先，需要安装 Autoprefixer 以及 PostCSS 作为其依赖。
+
+2. 配置 PostCSS
+在项目根目录下创建 postcss.config.js 文件，并进行配置：
+module.exports = {
+  plugins: [
+    require('autoprefixer')
+  ]
+};
+3. 配置 Browserslist
+Browserslist 用于定义你希望支持的浏览器范围。可以在 package.json 文件中添加 Browserslist 配置：
+{
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "IE 10"
+  ]
+}
+4. webpack配置
+rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  autoprefixer()
+                ]
+              }
+            }
+          }
+        ]
+      }]

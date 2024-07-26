@@ -1,3 +1,4 @@
+## pisition属性
 1. position: relative;相对定位
 
 1> 不影响元素本身特性（无论区块元素还是内联元素会保留其原本特性）
@@ -48,4 +49,4 @@
 
 initial 关键字用于设置 CSS 属性为它的默认值。
 
-initial 关键字可用于任何 HTML 元素上的任何 CSS 属性。
+initial 关键字可用于任何 HTML 元素上的任何 CSS 属性。 

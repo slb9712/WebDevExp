@@ -14,21 +14,7 @@ function flatten(arr) {
   }
   return newArr
 }
-console.log(flatten([1, 2, [3, 4, 5]]))
 
-
-
-function flatten(arr) {
-  let news = [];
-  for(i = 0; i < arr.length; i++) {
-    if (Array.isArray(arr[i])) {
-      news = news.concat(flatten(arr[i]))
-    } else {
-      news.push(arr[i])
-    }
-  }
-  return news
-}
 
 /**
  * 2、reduce
@@ -40,17 +26,14 @@ function flatten(arr) {
 }
 
 
-function flattern(arr) {
-  arr.reduce((rev, cur) =>{
-    return rev.concat(Array.isArray(cur) ? flatten(cur) : cur)
-  }, [])
-}
+const flattern = (arr) => arr.reduce((pre, cur) => pre.concat(Array.isArray(cur) ? flattern(cur):cur), [])
+
 
 /**
  * 3、some + 扩展运算符
  */
 function flatten(arr) {
-  while (arr.some(item => Array.isArray(item))) {
+  while (arr.some(item => Array.isArray(item))) { //只要一直有，就一直展开运算符
     arr = [].concat(...arr)
   }
   return arr

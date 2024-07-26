@@ -49,7 +49,7 @@
       vertical-align: middle;
     }
     .method3 {
-      width: 400px;
+      width: 100%;
       height: 100px;
       display: inline-block;
       background-color: #fff;
@@ -70,7 +70,12 @@
   </div>
   <div class="pos3">
     <div class="method3">
-      设置元素的父级为表格元素`display: table-cell`，其内部元素水平垂直都居中`text-align: center;vertical-align: middle;` ，设置子元素为行内块`display: inline-block; `，这种方式兼容性较好
+      <p>设置元素的父级为表格元素`display: table-cell`，其内部元素水平垂直都居中`text-align: center;vertical-align: middle;` ，设置子元素为行内块`display: inline-block; `，这种方式兼容性较好
+      </p>
+      <span>span
+      </span>
+      <!-- text-align:center 应用于块级元素或者单元格表格，作用于内部的内联内容或内联级元素-->
+       <!-- vertical-align:middle 应用于内联元素或表格单元格，内联元素必须具有行高（line height）或与其他内联元素、内联块级元素、内联表格元素等在同一行，内联元素使用影响自身，表格单元格中影响内部内容-->
     </div>
   </div>
   

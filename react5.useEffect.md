@@ -6,6 +6,8 @@
 
 深比较 useDeepCompareEffect
 
+# useEffect中的清理函数（在组件卸载或依赖重新执行副作用函数之前执行）
+
 ## useEffect(function, array)介绍
 useEffect可以让你在函数组件中执行副作用（数据获取、设置订阅、手动更改React组件中的DOM都属于副作用）
 useEffect在初次完成渲染之后都会执行一次, 配合第二个数组参数可以模拟类的一些生命周期。
@@ -18,7 +20,7 @@ useEffect(() =  {
 
 // to do 
 
-},[]) //空数组时只有初始化才会执行，useEffect相当于class组件里面componentDidMount。也相当于ahooks里面的useMount。
+},[]) //空数组时只在挂载和卸载才会执行，useEffect相当于class组件里面componentDidMount，componentWillUnmoun。也相当于ahooks里面的useMount。
 
 
 二、componentDidMount + 有条件的componentDidUpdate：
@@ -82,6 +84,7 @@ useEffect(() => {
     setState(state + 1)
 }, [])
 useEffect(() => {
+    console.log(state)
     cosnole.log('1执行')
     return () => {
         console.log('1销毁')
@@ -95,7 +98,7 @@ useEffect(() => {
     }
 }, [state])
 
-// useEffect中的清理函数（在组件卸载或依赖发生变化之前运行）只有在下一次useEffect执行或组件卸载时才会运行。所以，在这个例子中，'1销毁'和'2销毁'只会在state再次变化或组件卸载时打印。
+// useEffect中的清理函数（在组件卸载或依赖重新执行副作用函数之前执行）只有在下一次useEffect执行或组件卸载时才会运行。所以，在这个例子中，'1销毁'和'2销毁'只会在state再次变化或组件卸载时打印。
 // 总结：这段代码的执行结果将是在首次渲染后，state变为1，然后打印'1执行'和'2执行'。在下一次状态改变或组件卸载之前，不会打印'1销毁'或'2销毁'。
 
 ```
