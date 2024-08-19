@@ -8,6 +8,7 @@
  * call()
  */
 Function.prototype.myCall = function(context) {
+  // arguments = [this, arg1, arg2, arg3]
   if (typeof this === "function") { // 因为都是function原型上的方法
     let args = [...arguments].slice(1), result = null
     context = context || window // 判断上下文对象，没有传入的话则为window
@@ -18,35 +19,29 @@ Function.prototype.myCall = function(context) {
   }
 }
 
+if (typeof this == 'function') {
+  let args = [...arguments].slice(1), res = null
+  context = context || window
+  context.fn = this
+  res = context.fn(...args)
+  delete context.fn
+  return res
+}
+// call 和apply只有在处理参数的时候的差别
 function call(context) {
-  if (typeof this === 'function') {
-    let args = [...arguments].slice(1), res
-    context = context || window
-    context.fn=  this
+  if (typeof context  === 'function') {
+    let args = [...arguments].slice(1), res = null
+    context = context ? context || window
+    context.fn =this
     res = context.fn(...args)
     delete context.fn
     return res
+    if (args) {
+      res = context.fn(...args[0])
+    } else {
+      res = context.fn()
+    }
   }
-}
-
-// myApply = function(context) {
-//   context = context || this
-//   let res = null, args = [...arguments[1]]
-//   context.fn=  this
-//   if (arguments[1]) {
-//     res = context.fn(...arguments[1])
-//   } else {
-//     res = context.fn()
-//   }
-// }
-
-let res=  null
-context = context || window
-context.fn = this
-if (arguments[1]) {
-  res=  context.fn(...arguments[1])
-} else {
-  res = context.fn()
 }
 
 /***
@@ -54,7 +49,9 @@ if (arguments[1]) {
  * 如果返回的是一个对象的话，要有返回值
  * */
 Function.prototype.myApply = function(context) {
+  // arguments = [this, [arg1, arg2, arg3]]
   if (typeof this == "function") { // 调用对象是函数
+    let args = 
     let result = null
     context = context || window // context 不存在的话则为window
     context.fn = this // 把函数设为对象的方法

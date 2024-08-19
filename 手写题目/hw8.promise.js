@@ -1,3 +1,18 @@
+
+console.log(1)
+setTimeout(() => {
+    console.log(2)
+}, 0)
+new Promise((resolve, reject) => {
+    console.log(3);
+    resolve();
+    console.log(4);
+}).then(() => console.log(5))
+console.log(6)
+// 134652
+
+
+
 /**
  * Promise.all()会发起并行的Promise异步操作，等所有的异步操作全部结束后
  * 才会执行下一步的.then()操作。
@@ -47,14 +62,18 @@ function promiseall(promises) {
   })
 }
 
-function promiseall (reqs) {
+function promiseAll(reqs) {
+  let res = [];
+  let cnt = 0
   return new Promise((resolve, reject) => {
-    let res = new Array(req.length)
-    for (let i = 0; i < reqs.length; i++) {
-      Promise.resolve(reqs[i]).then(value => {
-        res[i] = value
-        if (res.length === reqs.length) return resolve(reqs)
-      }, error => return reject(error))
+    for (let i =0; i < reqs.length; i++) {
+      Promise.resolve(req[i]).then(value => {
+        res.push(value);
+        cnt += 1;
+        if (cnt === req.length) {
+          return resolve(res)
+        }
+      }, error => reject(error))
     }
   })
 }
